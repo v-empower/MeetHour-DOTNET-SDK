@@ -4,10 +4,16 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Version>1.0.0</Version>
+    <Authors>MeetHourDOTNETSDK</Authors>
+    <Description>Meet Hour DOT NET SDK. Meet Hour application offer HD Quality Video Conference. Visit https://meethour.io</Description>
+    <PackageProjectUrl>https://github.com/v-empower/MeetHour-DOTNET-SDK</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <None Include="..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
