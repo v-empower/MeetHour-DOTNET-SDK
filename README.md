@@ -22,10 +22,10 @@ Meet Hour is 100% free video conference solution with End to End Encrypted and m
     2. Android - https://bit.ly/2U239ll
     3. iOS - https://apple.co/3k8Rpbn
 
-### Composer package (Packagist) (Latest version - 1.0.1)
+### Nuget Package Update (Latest version - 1.0.1)
 
 ```
-    need to add latest version of package link
+    https://www.nuget.org/packages/meethour/
 
 ```
 
