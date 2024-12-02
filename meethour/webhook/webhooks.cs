@@ -19,7 +19,7 @@ namespace meethour.webhook
         public Dictionary<string, object> HandleRequest(string requestBody, Dictionary<string, string> headers)
         {
             var payload = requestBody;
-            headers.TryGetValue("X-Signature", out var signature);
+            var signature = headers.GetValueOrDefault("x-signature");
 
             if (signature != null && ValidateSignature(payload, signature))
             {
@@ -51,18 +51,26 @@ namespace meethour.webhook
 
         private Dictionary<string, object> ProcessEvent(Dictionary<string, object> data, string payload)
         {
-            if (data.TryGetValue("event_type", out var eventTypeObj) && eventTypeObj is string eventType)
+            if (data.TryGetValue("event_type", out var eventTypeObj))
             {
-                return eventType switch
+                switch (eventTypeObj.ToString())
                 {
-                    "join_meeting" => HandleJoinMeeting(data),
-                    "exit_meeting" => HandleExitMeeting(data),
-                    "save_meeting_recording" => HandleSaveMeetingRecording(data),
-                    _ => GenerateResponse(false, 400, "Unknown event type: " + eventType, data),
-                };
+                    case "join_meeting":
+                        return HandleJoinMeeting(data);
+
+                    case "exit_meeting":
+                        return HandleExitMeeting(data);
+
+                    case "save_meeting_recording":
+                        return HandleSaveMeetingRecording(data);
+
+                    default:
+                        return GenerateResponse(false, 400, "Unknown event type: " + eventTypeObj, data);
+                }
             }
             return GenerateResponse(false, 400, "Event type missing.", data);
         }
+
 
         private Dictionary<string, object> HandleJoinMeeting(Dictionary<string, object> data)
         {
